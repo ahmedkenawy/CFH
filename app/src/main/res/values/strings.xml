@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">CFH Test</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="logout">Logout</string>
+    <string name="my_profile">My Profile</string>
+    <string name="terms_condition">Terms And Conditions</string>
+    <string name="first_fragment_label">Sign In</string>
+    <string name="second_fragment_label">Sign Up</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+
+    <string name="login">Login</string>
+    <string name="first_name">First Name</string>
+    <string name="age">Your Age</string>
+    <string name="email">Your Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">your Password</string>
+    <string name="last_name">Last Name</string>
+    <string name="user_information">User Information</string>
+
+    <string name="location_permission_required">Location Permission Required</string>
+    <string name="location_permission_is_required_to_use_this_feature_please_grant_the_permission_in_the_app_settings">Location permission is required to use this feature. Please grant the permission in the app settings.</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">cancel</string>
+    <string name="category_image">Category Image</string>
+    <string name="didn_t_have_an_account_sign_up"><u>Didn\'t have an Account, Sign Up?</u></string>
+    <string name="already_have_an_account_sign_in"><u>Already have an account? Sign in</u></string>
+    <string name="icon">logo</string>
+    <string name="cairo_financial_holding_company">Cairo Financial Hold Company</string>
+</resources>
