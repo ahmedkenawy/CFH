@@ -10,10 +10,21 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * Dagger module for providing repository instances.
+ * This module is used to provide dependencies related to repositories.
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 object RepositoryModule {
 
+    /**
+     * Provides an instance of [AppRepository].
+     *
+     * @param dataStorePreference An instance of [DataStorePreference] used for local data operations.
+     * @param apiService An instance of [ApiService] used for remote API operations.
+     * @return An instance of [AppRepository] implemented by [AppRepositoryImp].
+     */
     @Provides
     @Singleton
     fun provideUserRepository(

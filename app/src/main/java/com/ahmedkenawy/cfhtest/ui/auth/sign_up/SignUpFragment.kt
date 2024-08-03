@@ -13,6 +13,11 @@ import com.ahmedkenawy.cfhtest.databinding.FragmentSingUpBinding
 import com.ahmedkenawy.cfhtest.ui.main.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Fragment responsible for handling user sign-up functionality.
+ *
+ * This fragment manages user input, interacts with the SignUpViewModel for user registration, and navigates to the MainActivity upon successful registration.
+ */
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
@@ -28,19 +33,21 @@ class SignUpFragment : Fragment() {
         binding.viewModel = signUpViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Observe the registration success state
         signUpViewModel.isRegistrationSuccessful.observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
+                // Navigate to MainActivity on successful registration
                 startActivity(Intent(requireContext(), MainActivity::class.java))
                 requireActivity().finish()
             }
         }
 
+        // Handle navigation to SignInFragment
         binding.tvSingIn.setOnClickListener {
             findNavController().navigate(R.id.action_SingUpFragment_to_SingInFragment)
         }

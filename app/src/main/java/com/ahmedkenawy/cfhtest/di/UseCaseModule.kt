@@ -12,11 +12,21 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
+/**
+ * Dagger module for providing UseCase instances.
+ * This module provides singleton instances of use cases for authentication and main functionalities.
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 object UseCaseModule {
 
+    /**
+     * Provides a singleton instance of [AuthUseCase].
+     *
+     * @param signInUseCase An instance of [SignInUseCase] used for sign-in operations.
+     * @param signUpUseCase An instance of [SignUpUseCase] used for sign-up operations.
+     * @return A singleton instance of [AuthUseCase] that aggregates [SignInUseCase] and [SignUpUseCase].
+     */
     @Provides
     @Singleton
     fun provideAuthUseCase(
@@ -29,6 +39,13 @@ object UseCaseModule {
         )
     }
 
+    /**
+     * Provides a singleton instance of [MainUseCase].
+     *
+     * @param profileUseCase An instance of [ProfileUseCase] used for profile-related operations.
+     * @param homeUseCase An instance of [HomeUseCase] used for home-related operations.
+     * @return A singleton instance of [MainUseCase] that aggregates [ProfileUseCase] and [HomeUseCase].
+     */
     @Provides
     @Singleton
     fun provideMainUseCase(

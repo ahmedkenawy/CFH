@@ -9,13 +9,21 @@ import com.ahmedkenawy.cfhtest.domain.use_case.auth_use_case.AuthUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+/**
+ * ViewModel for handling user registration logic in the SignUpFragment.
+ *
+ * This ViewModel manages user input validation, error messages, and registration logic.
+ */
 @HiltViewModel
 class SignUpViewModel @Inject constructor(private val authUseCase: AuthUseCase) : BaseAuthViewModel() {
 
+    // LiveData for user input fields
     val firstName = MutableLiveData<String>()
     val lastName = MutableLiveData<String>()
     val age = MutableLiveData<String>()
 
+    // LiveData for input validation error messages
     private val _firstNameError = MutableLiveData<String?>()
     val firstNameError: LiveData<String?> get() = _firstNameError
 
@@ -25,9 +33,16 @@ class SignUpViewModel @Inject constructor(private val authUseCase: AuthUseCase) 
     private val _ageError = MutableLiveData<String?>()
     val ageError: LiveData<String?> get() = _ageError
 
+    // LiveData to track registration success
     private val _isRegistrationSuccessful = MutableLiveData<Boolean>()
     val isRegistrationSuccessful: LiveData<Boolean> get() = _isRegistrationSuccessful
 
+    /**
+     * Validates user input and performs registration.
+     *
+     * This method checks the validity of user input fields and updates error messages accordingly.
+     * If all input fields are valid, it registers the user by invoking the use case.
+     */
     fun validateAndRegister() {
         var isValid = true
 
@@ -83,4 +98,3 @@ class SignUpViewModel @Inject constructor(private val authUseCase: AuthUseCase) 
         }
     }
 }
-

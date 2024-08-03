@@ -13,9 +13,18 @@ import com.ahmedkenawy.cfhtest.utils.Constants.PASSWORD
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Class for managing user preferences using DataStore.
+ *
+ * @param preferences DataStore instance for managing user preferences.
+ */
 class DataStorePreference @Inject constructor(private val preferences: DataStore<Preferences>) {
 
-
+    /**
+     * Saves the user information in DataStore.
+     *
+     * @param user The [User] object containing user details to be saved.
+     */
     suspend fun saveUser(user: User) {
         preferences.edit {
             it[preferencesKey<String>(FIRST_NAME)] = user.firstName
@@ -26,6 +35,11 @@ class DataStorePreference @Inject constructor(private val preferences: DataStore
         }
     }
 
+    /**
+     * Flow that emits the user information from DataStore.
+     *
+     * @return A Flow of [User] object containing the user details.
+     */
     val userInfo = preferences.data.map {
         val firstName = it[preferencesKey<String>(FIRST_NAME)] ?: ""
         val lastName = it[preferencesKey<String>(LAST_NAME)] ?: ""
@@ -35,6 +49,4 @@ class DataStorePreference @Inject constructor(private val preferences: DataStore
 
         User(firstName, lastName, age, email, password)
     }
-
-
 }

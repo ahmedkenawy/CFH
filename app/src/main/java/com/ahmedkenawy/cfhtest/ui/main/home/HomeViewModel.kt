@@ -19,18 +19,30 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.pow
 
+/**
+ * ViewModel for the HomeFragment, responsible for managing UI-related data and handling the logic
+ * to fetch nearby venues based on the user's location.
+ *
+ * @property mainUseCase The use case that handles the main business logic for fetching venue data.
+ */
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val mainUseCase: MainUseCase) : ViewModel() {
 
+    // LiveData for holding the state of venue data
     private val _venuesLiveData = SingleLiveEvent<Resource<VenuesResponse>?>()
     val venuesLiveData: SingleLiveEvent<Resource<VenuesResponse>?> get() = _venuesLiveData
 
-
+    // Exception handler for coroutine errors
     private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         _venuesLiveData.value = Resource.Error(exception.localizedMessage ?: "No Internet Connection")
     }
 
-
+    /**
+     * Creates a Flow to fetch venues data and emit the corresponding Resource states.
+     *
+     * @param location The location string (latitude,longitude) to fetch venues for.
+     * @return A Flow that emits Resource states (Loading, Success, Error) for venue data.
+     */
     private fun getVenuesFlow(location: String): Flow<Resource<VenuesResponse>> = flow {
         emit(Resource.Loading()) // Emit loading state
         val response = mainUseCase.homeUseCase.invoke(location)
@@ -46,7 +58,12 @@ class HomeViewModel @Inject constructor(private val mainUseCase: MainUseCase) : 
         }
     }
 
-
+    /**
+     * Fetches venues data for the given location and updates the LiveData with the results.
+     * Utilizes retry logic with exponential backoff in case of errors.
+     *
+     * @param location The location string (latitude,longitude) to fetch venues for.
+     */
     fun getVenues(location: String) {
         viewModelScope.launch(exceptionHandler) {
             getVenuesFlow(location)
